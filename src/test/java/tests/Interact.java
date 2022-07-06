@@ -44,9 +44,8 @@ public class Interact extends BaseTest {
         driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[2]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.ImageView[1]").click();
         driver.findElementById("xyz.medigo.user:id/order_done").click();
         driver.findElementById("xyz.medigo.user:id/rating_like_sure").click();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
         driver.findElementByAccessibilityId("Navigate up").click();
-
 //    }
 //    @Test
 //    public void test_ecom() throws InterruptedException {

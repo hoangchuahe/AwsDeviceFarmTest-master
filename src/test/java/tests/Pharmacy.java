@@ -2,6 +2,8 @@ package tests;
 
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 public class Pharmacy extends BaseTest {
@@ -15,6 +17,8 @@ public class Pharmacy extends BaseTest {
         driver.findElementById("xyz.medigo.pharmacy:id/lnAddMoreProduct").click();
         driver.findElementByAccessibilityId("Từ kho hàng").click();
         driver.findElementById("xyz.medigo.pharmacy:id/edtSearch").sendKeys("do");
+        WebDriverWait wait = new WebDriverWait(driver,15);
+        wait.until(ExpectedConditions.visibilityOf(driver.findElementById("xyz.medigo.pharmacy:id/tvProductName")));
         driver.findElementById("xyz.medigo.pharmacy:id/tvProductName").click();
         driver.findElementById("xyz.medigo.pharmacy:id/tvPlusOne").click();
         driver.findElementById("xyz.medigo.pharmacy:id/btnAddMedicine").click();

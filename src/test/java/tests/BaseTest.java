@@ -83,6 +83,8 @@ public class BaseTest {
         //capabilities.setCapability("locationContextEnabled", "true");
         driver = new AndroidDriver<>(url, capabilities);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+
     }
 
     @AfterTest
