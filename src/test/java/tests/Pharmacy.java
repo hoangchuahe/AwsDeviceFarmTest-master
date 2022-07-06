@@ -1,104 +1,166 @@
 package tests;
 
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.Rectangle;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
+public class Pharmacy extends BaseTest {
 
-public class Pharmacy extends BaseTest{
-    @Test
-    public void Pharmacy_side() throws InterruptedException {
-    MobileElement pharmacy2 = user.findElementById("xyz.medigo.pharmacy:id/login_phar_code");
-        pharmacy2.sendKeys("cuongmedi");
-    MobileElement pharmacy3 = user.findElementById("xyz.medigo.pharmacy:id/continue_button");
-        pharmacy3.click();
-    MobileElement pharmacy4 = user.findElementById("xyz.medigo.pharmacy:id/login_email");
-        pharmacy4.sendKeys("lalala@gmail.com");
-    MobileElement pharmacy5 = user.findElementById("xyz.medigo.pharmacy:id/login_password");
-        pharmacy5.sendKeys("123123");
-    MobileElement pharmacy6 = user.findElementById("xyz.medigo.pharmacy:id/login_button");
-        pharmacy6.click();
+    @Test // Accept
+    public void test_1() throws InterruptedException {
+        driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().textContains(\"NHẬN ĐƠN\"))")).click();
+        driver.findElementById("xyz.medigo.pharmacy:id/order_create").click();
+        driver.findElementById("xyz.medigo.pharmacy:id/lnAddMoreProduct").click();
+        driver.findElementByAccessibilityId("Từ kho hàng").click();
+        driver.findElementById("xyz.medigo.pharmacy:id/edtSearch").sendKeys("do");
+        driver.findElementById("xyz.medigo.pharmacy:id/tvProductName").click();
+        driver.findElementById("xyz.medigo.pharmacy:id/tvPlusOne").click();
+        driver.findElementById("xyz.medigo.pharmacy:id/btnAddMedicine").click();
+        MobileElement el23 = driver.findElementById("xyz.medigo.pharmacy:id/button_send");
+        Thread.sleep(1500);
 
-    WebDriverWait wait = new WebDriverWait(user, 60);
-        wait.until(ExpectedConditions.visibilityOf(user.findElementById("xyz.medigo.pharmacy:id/btn_accept")));
-    MobileElement pharmacy7 = user.findElementById("xyz.medigo.pharmacy:id/btn_accept");
-        pharmacy7.click();
-    MobileElement pharmacy8 = user.findElementById("xyz.medigo.pharmacy:id/button_call_free");
-        pharmacy8.click();
-    MobileElement pharmacy9 = user.findElementById("com.android.permissioncontroller:id/permission_allow_button");
-        pharmacy9.click();
+        swipeElementAndroid(el23, "RIGHT", driver, 800);
 
-        Thread.sleep(5000);
+        driver.findElementById("xyz.medigo.pharmacy:id/btn_yes").click();
 
-    MobileElement pharmacy10 = user.findElementById("xyz.medigo.pharmacy:id/audio_btn_end");
-        pharmacy10.click();
-    MobileElement pharmacy11 = user.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.LinearLayout[2]/android.widget.TextView");
-        pharmacy11.click();
+    }
+    @Test// Login
+    public void test_2() throws InterruptedException {
+        // wrong login code
+        MobileElement el1 = driver.findElementById("xyz.medigo.pharmacy:id/login_phar_code");
+        el1.sendKeys("cuonglala");
+        MobileElement el2 = driver.findElementById("xyz.medigo.pharmacy:id/continue_button");
+        el2.click();
+        // popup
+        MobileElement el3 = driver.findElementById("android:id/button1");
+        el3.click();
+        // login again
+        MobileElement el4 = driver.findElementById("xyz.medigo.pharmacy:id/login_phar_code");
+        el4.sendKeys("cuongmedi");
+        MobileElement el5 = driver.findElementById("xyz.medigo.pharmacy:id/continue_button");
+        el5.click();
+        // email and pass
+        MobileElement el6 = driver.findElementById("xyz.medigo.pharmacy:id/login_email");
+        el6.sendKeys("lalala@gmail.com");
+        MobileElement el7 = driver.findElementById("xyz.medigo.pharmacy:id/login_password");
+        el7.sendKeys("321321"); // login fail
+        MobileElement el8 = driver.findElementById("xyz.medigo.pharmacy:id/login_button");
+        el8.click();
+        MobileElement el9 = driver.findElementById("android:id/button1");
+        el9.click();
+        // re input pass
+        MobileElement el10 = driver.findElementById("xyz.medigo.pharmacy:id/login_password");
+        el10.sendKeys("123123");
+        MobileElement el11 = driver.findElementById("xyz.medigo.pharmacy:id/login_button");
+        el11.click();
+        Thread.sleep(2000);
+    }
 
-    MobileElement pharmacy12 = user.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.ImageView");
+    @Test(priority = 2) // Modify product
+    public void test_3() throws InterruptedException {
+        MobileElement el25 = driver.findElementById("xyz.medigo.pharmacy:id/tab_warehouse");
+        el25.click();
+        Thread.sleep(1000);
+        MobileElement el26 = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().textContains(\"THÊM SẢN PHẨM MỚI\"))"));
+        el26.click();
+        MobileElement el27 = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[2]/android.view.View/android.widget.EditText");
+        el27.sendKeys("b");
+        Thread.sleep(1000);
+        MobileElement el28 = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().textContains(\"Gel tẩy\"))"));
+        el28.click();
+        Thread.sleep(1000);
+        MobileElement el29 = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[2]/android.view.View[8]/android.view.View[4]/android.widget.EditText");
+        el29.sendKeys("333333");
+        MobileElement el30 = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View[2]/android.view.View[8]/android.view.View[6]/android.widget.EditText");
+        el30.sendKeys("444444");
+        MobileElement el31 = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().textContains(\"HOÀN THÀNH\"))"));
+        el31.click();
+        Thread.sleep(1000);
+        MobileElement el32 = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().textContains(\"OK\"))"));
+        el32.click();
+        Thread.sleep(1000);
+        MobileElement el33 = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().textContains(\"Gel tẩy\"))"));
+        el33.click();
+        Thread.sleep(1000);
+        MobileElement el34 = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.app.Dialog/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[8]/android.view.View[4]/android.widget.EditText");
+        el34.sendKeys("222222");
+        MobileElement el35 = driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.app.Dialog/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[8]/android.view.View[6]/android.widget.EditText");
+        el35.sendKeys("333333");
+        MobileElement el36 = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().textContains(\"HOÀN THÀNH\"))"));
+        el36.click();
+        Thread.sleep(1000);
+        MobileElement el37 = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().textContains(\"Gel tẩy\"))"));
+        el37.click();
+        Thread.sleep(1000);
+        MobileElement el38 = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().textContains(\"Xoá\"))"));
+        el38.click();
+        MobileElement el39 = driver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().textContains(\"OK\"))"));
+        el39.click();
+    }
 
-        Thread.sleep(500);
-    swipeElementAndroid(pharmacy12,"RIGHT", (AndroidDriver) user, 800);
-
-    MobileElement pharmacy13 = user.findElementById("xyz.medigo.pharmacy:id/btn_yes");
-        pharmacy13.click();
-    MobileElement pharmacy14 = user.findElementById("xyz.medigo.pharmacy:id/tvViewOrder");
-        pharmacy14.click();
-
-        Thread.sleep(500);
-        user.navigate().back();
-        user.quit();
-}
-
-    public static void swipeElementAndroid(MobileElement el, String dir, AndroidDriver user, int s) {
-        final int ANIMATION_TIME = 500; // ms
-
-        final int PRESS_TIME = 500; // ms
-        Rectangle rect = el.getRect();
-        PointOption pointOptionStart, pointOptionEnd;
-        pointOptionStart = PointOption.point(rect.x, rect.y);
-        switch (dir) {
-            case "DOWN": // from up to down
-                pointOptionEnd = PointOption.point(rect.x , rect.y - s);
-                break;
-            case "UP": // from down to up
-                pointOptionEnd = PointOption.point(rect.x , rect.y + s);
-                break;
-            case "LEFT": // from right to left
-                pointOptionEnd = PointOption.point(rect.x - s, rect.y);
-                break;
-            case "RIGHT": // from left to right
-                pointOptionEnd = PointOption.point(rect.x + s, rect.y);
-                break;
-            default:
-                throw new IllegalArgumentException("swipeElementAndroid(): dir: '" + dir + "' NOT supported");
-        }
-
-        // execute swipe using TouchAction
-        try {
-            new TouchAction(user)
-                    .press(pointOptionStart)
-                    // a bit more reliable when we add small wait
-                    .waitAction(WaitOptions.waitOptions(Duration.ofMillis(PRESS_TIME)))
-                    .moveTo(pointOptionEnd)
-                    .release().perform();
-        } catch (Exception e) {
-            System.err.println("swipeElementAndroid(): TouchAction FAILED\n" + e.getMessage());
-            return;
-        }
-
-        // always allow swipe action to complete
-        try {
-            Thread.sleep(ANIMATION_TIME);
-        } catch (InterruptedException e) {
-            // ignore
-        }
+    @Test(priority = 2) // Modify Password
+    public void test_4() throws InterruptedException {
+        MobileElement el40 = driver.findElementById("xyz.medigo.pharmacy:id/tab_account");
+        Thread.sleep(1000);
+        el40.click();
+        MobileElement el41 = driver.findElementById("xyz.medigo.pharmacy:id/info_change_pass");
+        el41.click();
+        MobileElement el42 = driver.findElementById("xyz.medigo.pharmacy:id/current_password");
+        el42.sendKeys("123123");
+        MobileElement el43 = driver.findElementById("xyz.medigo.pharmacy:id/new_password");
+        el43.sendKeys("123456");
+        MobileElement el44 = driver.findElementById("xyz.medigo.pharmacy:id/verify_password");
+        el44.sendKeys("123456");
+        MobileElement el45 = driver.findElementById("xyz.medigo.pharmacy:id/button_change_complete");
+        el45.click();
+        MobileElement el46 = driver.findElementById("android:id/button1");
+        el46.click();
+        MobileElement el47 = driver.findElementById("xyz.medigo.pharmacy:id/rlLogout");
+        el47.click();
+        MobileElement el48 = driver.findElementById("android:id/button1");
+        el48.click();
+        MobileElement el49 = driver.findElementById("xyz.medigo.pharmacy:id/continue_button");
+        el49.click();
+        MobileElement el50 = driver.findElementById("xyz.medigo.pharmacy:id/login_email");
+        el50.sendKeys("lalala@gmail.com");
+        MobileElement el51 = driver.findElementById("xyz.medigo.pharmacy:id/login_password");
+        el51.sendKeys("123456");
+        MobileElement el52 = driver.findElementById("xyz.medigo.pharmacy:id/login_button");
+        el52.click();
+        MobileElement el53 = driver.findElementById("xyz.medigo.pharmacy:id/tab_account");
+        el53.click();
+        MobileElement el54 = driver.findElementById("xyz.medigo.pharmacy:id/info_change_pass");
+        el54.click();
+        MobileElement el55 = driver.findElementById("xyz.medigo.pharmacy:id/current_password");
+        el55.sendKeys("123456");
+        MobileElement el56 = driver.findElementById("xyz.medigo.pharmacy:id/new_password");
+        el56.sendKeys("123123");
+        MobileElement el57 = driver.findElementById("xyz.medigo.pharmacy:id/verify_password");
+        el57.sendKeys("123123");
+        MobileElement el58 = driver.findElementById("xyz.medigo.pharmacy:id/button_change_complete");
+        el58.click();
+        MobileElement el59 = driver.findElementById("android:id/button1");
+        el59.click();
+        System.out.println("Success");
     }
 }
