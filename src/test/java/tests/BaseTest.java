@@ -73,6 +73,7 @@ public class BaseTest {
         final String URL_STRING = "http://127.0.0.1:4723/wd/hub";
         URL url = new URL(URL_STRING);
         DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("unicodeKeyboard", "true");
 //        capabilities.setCapability("platformName", "Android");
 //        capabilities.setCapability("platformVersion", "10");
 //        capabilities.setCapability("udid", "emulator-5554");
