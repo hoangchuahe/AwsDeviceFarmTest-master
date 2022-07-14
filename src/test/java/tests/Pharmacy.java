@@ -40,7 +40,6 @@ public class Pharmacy extends BaseTest {
         swipeElementAndroid(el23, "RIGHT", driver, 1000);
 
         driver.findElementById("xyz.medigo.pharmacy:id/btn_yes").click();
-
     }
 
     @Test(priority = 2) // Modify product

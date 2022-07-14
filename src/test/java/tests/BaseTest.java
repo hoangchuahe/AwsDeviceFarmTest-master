@@ -74,12 +74,12 @@ public class BaseTest {
         URL url = new URL(URL_STRING);
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("unicodeKeyboard", "true");
-//        capabilities.setCapability("platformName", "Android");
-//        capabilities.setCapability("platformVersion", "10");
-//        capabilities.setCapability("udid", "emulator-5554");
-//        capabilities.setCapability("automationName", "UIAutomator2");
-//        capabilities.setCapability("appPackage", userAppPackage);
-//        capabilities.setCapability("appActivity", userAppActivity);
+        capabilities.setCapability("platformName", "Android");
+        capabilities.setCapability("platformVersion", "10");
+        capabilities.setCapability("udid", "emulator-5554");
+        capabilities.setCapability("automationName", "UIAutomator2");
+        capabilities.setCapability("appPackage", userAppPackage);
+        capabilities.setCapability("appActivity", userAppActivity);
         //capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
         //capabilities.setCapability("locationContextEnabled", "true");
         driver = new AndroidDriver<>(url, capabilities);

@@ -1,6 +1,5 @@
 package tests;
 
-import io.appium.java_client.MobileBy;
 import org.testng.annotations.Test;
 
 public class Interact extends BaseTest {
@@ -10,24 +9,27 @@ public class Interact extends BaseTest {
         new AppTest().Login();
         launchPharmacyApp();
         new Pharmacy().login();
-    //}
+    }
 
-//    @Test
-//    public void test_on_demand() throws InterruptedException {
-//        launchUserApp();
-//        driver.findElementById("xyz.medigo.user:id/tv_find_pharmacy").click();
-//        driver.findElementById("xyz.medigo.user:id/tvOrderNow").click();
-//        Thread.sleep(2000);
-//        launchPharmacyApp();
-//        new Pharmacy().test_1();
-//        launchUserApp();
-//        // choose payment menthod
-//        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[2]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.ImageView[1]").click();
-//        driver.findElementById("xyz.medigo.user:id/order_done").click();
-//        driver.findElementById("xyz.medigo.user:id/rating_like_sure").click();
-//        Thread.sleep(4000);
-//        driver.findElementByAccessibilityId("Navigate up").click();
-//    }
+    @Test(priority = 2)
+    public void test_on_demand() throws InterruptedException {
+        launchUserApp();
+        driver.findElementById("xyz.medigo.user:id/tv_find_pharmacy").click();
+        driver.findElementById("xyz.medigo.user:id/tvOrderNow").click();
+        Thread.sleep(2000);
+
+        launchPharmacyApp();
+        SupportFunc.pharmacy_modify();
+
+        launchUserApp();
+        // choose payment menthod
+        driver.findElementByXPath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/androidx.drawerlayout.widget.DrawerLayout/android.view.ViewGroup/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[2]/androidx.recyclerview.widget.RecyclerView/android.view.ViewGroup[2]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.ImageView[1]").click();
+        driver.findElementById("xyz.medigo.user:id/order_done").click();
+        driver.findElementById("xyz.medigo.user:id/rating_like_sure").click();
+        Thread.sleep(4000);
+        driver.findElementByAccessibilityId("Navigate up").click();
+    }
+
 //    @Test
 //    public void test_ecom() throws InterruptedException {
 //        launchUserApp();
@@ -83,7 +85,7 @@ public class Interact extends BaseTest {
 //
 //    @Test
 //    public void on_demand_pharmacy() throws InterruptedException {
-        //user
+//        //user
 //        launchUserApp();
 //        driver.findElementById("xyz.medigo.user:id/tv_find_pharmacy").click();
 //        driver.findElementById("xyz.medigo.user:id/tvOrderNow").click();
@@ -108,28 +110,28 @@ public class Interact extends BaseTest {
 //
 //    @Test
 //    public void on_demand_user() throws InterruptedException {
-        launchUserApp();
-        driver.findElementById("xyz.medigo.user:id/tv_find_pharmacy").click();
-        driver.findElementById("xyz.medigo.user:id/tvOrderNow").click();
-
-        //pharmacy
-        launchPharmacyApp();
-        driver.findElementById("xyz.medigo.pharmacy:id/btn_accept").click();
-        driver.findElementById("xyz.medigo.pharmacy:id/order_create").click();
-        driver.findElementById("xyz.medigo.pharmacy:id/lnAddMoreProduct").click();
-        driver.findElementByAccessibilityId("Từ kho hàng").click();
-        driver.findElementById("xyz.medigo.pharmacy:id/edtSearch").sendKeys("dong");
-        driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().textContains(\"Đông Trùng\")")).click();
-        driver.findElementById("xyz.medigo.pharmacy:id/btnAddMedicine").click();
-
-        //user
-        launchUserApp();
-        Thread.sleep(30000);
-        driver.findElementById("xyz.medigo.user:id/tv_cancelPharmaRequest").click();
-        driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().textContains(\"Đợi nhà thuốc\")")).click();
-        driver.findElementById("xyz.medigo.user:id/cancel_order_sent").click();
-        driver.findElementById("xyz.medigo.user:id/find_cancel").click();
-        Thread.sleep(500);
-        driver.navigate().back();
-    }
+//        launchUserApp();
+//        driver.findElementById("xyz.medigo.user:id/tv_find_pharmacy").click();
+//        driver.findElementById("xyz.medigo.user:id/tvOrderNow").click();
+//
+//        //pharmacy
+//        launchPharmacyApp();
+//        driver.findElementById("xyz.medigo.pharmacy:id/btn_accept").click();
+//        driver.findElementById("xyz.medigo.pharmacy:id/order_create").click();
+//        driver.findElementById("xyz.medigo.pharmacy:id/lnAddMoreProduct").click();
+//        driver.findElementByAccessibilityId("Từ kho hàng").click();
+//        driver.findElementById("xyz.medigo.pharmacy:id/edtSearch").sendKeys("dong");
+//        driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().textContains(\"Đông Trùng\")")).click();
+//        driver.findElementById("xyz.medigo.pharmacy:id/btnAddMedicine").click();
+//
+//        //user
+//        launchUserApp();
+//        Thread.sleep(30000);
+//        driver.findElementById("xyz.medigo.user:id/tv_cancelPharmaRequest").click();
+//        driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().textContains(\"Đợi nhà thuốc\")")).click();
+//        driver.findElementById("xyz.medigo.user:id/cancel_order_sent").click();
+//        driver.findElementById("xyz.medigo.user:id/find_cancel").click();
+//        Thread.sleep(500);
+//        driver.navigate().back();
+//    }
 }
